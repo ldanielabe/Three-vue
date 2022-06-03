@@ -54,17 +54,18 @@ export default {
  
   <RouterView />
 
+
   <div>
     <button :class="{'par': isActive == false, 'impar': isActive == true}" @click="increment">Count: {{ count }}</button>
   </div>
-  <v-btn
-  elevation="2"
-  large
->Click</v-btn>
+  
+  <hr/>
 
   <ul>
     <li v-for="item in array">{{ item }}</li>
   </ul>
+  
+  <hr/>
 
     <h1>TO DO LIST</h1>
     <p>Create a list of tasks:</p>
@@ -157,7 +158,7 @@ nav a:first-of-type {
   }
 
   #app {
-    display: grid;
+    display: flow-root;
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
