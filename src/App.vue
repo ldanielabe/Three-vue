@@ -1,41 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from '@/components/HelloWorld.vue'
-import Task from '@/components/Task.vue'
 </script>
-
-<script>
-export default {
-  data() {
-    return {
-      count: 0,
-      isActive: false,
-      array: ['this', 'is', 'an', 'example', 'of', 'loop'],
-      newTask: ''
-    }
-  },
-  methods: {
-    increment() {
-      this.isActive = !this.isActive;
-      this.count++
-    },
-    getData() {
-    return this.array;
-    },
-    addTask(){
-      if (this.newTask) {
-        this.$store.commit('ADD_TASK', this.newTask);
-        this.newTask = '';
-      }
-    }
-  },
-  mounted() {
-    // this.increment()
-  }
-}
-</script>
-
-
 
 <template>
 
@@ -44,10 +10,10 @@ export default {
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/car">Car</RouterLink>
+        <RouterLink to="/threejs">Three Js</RouterLink>
       </nav>
     </div>
   </header>
@@ -55,33 +21,7 @@ export default {
   <RouterView />
 
 
-  <div>
-    <button :class="{'par': isActive == false, 'impar': isActive == true}" @click="increment">Count: {{ count }}</button>
-  </div>
   
-  <hr/>
-
-  <ul>
-    <li v-for="item in array">{{ item }}</li>
-  </ul>
-
-  <hr/>
-
-    <h1>TO DO LIST</h1>
-    <p>Create a list of tasks:</p>
-
-    <div class="create-new">
-      <input type="text" v-model="newTask" placeholder="Add a new task" @keypress.enter="addTask" />
-      <button @click="addTask">ADD</button>
-    </div>
-  
-
-    <div class="tasks">
-      <Task v-for="(task, i) in $store.state.tasks"
-      :key="i"
-      :task="task" />
-    </div>
-
 </template>
 
 <style>
@@ -160,11 +100,11 @@ nav a:first-of-type {
   #app {
     display: flow-root;
     grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    padding: 0 18rem;
   }
 
   header {
-    display: flex;
+    display: flow-root;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }
@@ -307,5 +247,9 @@ nav a:first-of-type {
       }
       .badge.offer {
         background-color: rgb(197, 107, 33);
+      }
+
+      .article {
+        height: 215px;
       }
 </style>

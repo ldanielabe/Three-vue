@@ -8,12 +8,12 @@ export default {
         stock: "2",
         content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque fugiat fugit fuga sapiente alias eveniet pariatur iure libero facilis veniam.",
         images:[{
-          image:"../images/camara.jpg",
-          thumbnail:"../images/camara-thumb.jpg"
+          image:"/src/assets/images/camara-2.jpg",
+          thumbnail:"/src/assets/images/camara-thumb.jpg"
         },
         {
-          image:"../images/camara-2.jpg",
-          thumbnail:"../images/camara-2-thumb.jpg"
+          image:"/src/assets/images/camara-2.jpg",
+          thumbnail:"/src/assets/images/camara-2-thumb.jpg"
         }
         ]
       },
@@ -57,7 +57,7 @@ export default {
         </div>
       </div>
       <div class="product__image">
-        <img src="" alt="" />
+        <img class="article" :src="product.images[0].image" alt="" />
       </div>
     </section>
     

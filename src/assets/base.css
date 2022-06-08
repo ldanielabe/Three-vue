@@ -191,7 +191,7 @@ main .footer {
 @media (min-width: 1024px) {
   .about {
     min-height: 30vh;
-    display: flex;
+    display: flow-root;
     align-items: center;
   }
 
