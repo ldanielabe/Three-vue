@@ -252,4 +252,11 @@ nav a:first-of-type {
       .article {
         height: 215px;
       }
+  
+  canvas {
+    width: 100%;
+    height: 100%;
+    display; block;
+  }
+  
 </style>

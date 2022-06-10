@@ -7,6 +7,9 @@
     "preview": "vite preview --port 5050"
   },
   "dependencies": {
+    "three": "^0.141.0",
+    "three-full": "^28.0.2",
+    "three-orbitcontrols": "^2.110.3",
     "vue": "^3.2.33",
     "vue-router": "^4.0.14",
     "vuetify": "^2.6.6",
