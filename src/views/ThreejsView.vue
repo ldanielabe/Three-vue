@@ -12,7 +12,7 @@ import * as BufferGeometryUtils from '../libs/BufferGeometryUtils.js';
 export default {
   data() {
 
-    let container, stats;
+    	let container, stats;
 		let camera, controls, scene, renderer;
 		let pickingTexture, pickingScene;
 		let highlightBox;
@@ -43,22 +43,22 @@ export default {
   },
   methods: {
    init() {
-				container = document.getElementById( 'container' );
+				this.container = document.getElementById( 'container' );
 
-				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
-				camera.position.z = 1000;
+				this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
+				this.camera.position.z = 1000;
 
-				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xffffff );
+				this.scene = new THREE.Scene();
+				this.scene.background = new THREE.Color( 0xffffff );
 
-				pickingScene = new THREE.Scene();
-				pickingTexture = new THREE.WebGLRenderTarget( 1, 1 );
+				this.pickingScene = new THREE.Scene();
+				this.pickingTexture = new THREE.WebGLRenderTarget( 1, 1 );
 
-				scene.add( new THREE.AmbientLight( 0x555555 ) );
+				this.scene.add( new THREE.AmbientLight( 0x555555 ) );
 
 				const light = new THREE.SpotLight( 0xffffff, 1.5 );
 				light.position.set( 0, 500, 2000 );
-				scene.add( light );
+				this.scene.add( light );
 
 				const pickingMaterial = new THREE.MeshBasicMaterial( { vertexColors: true } );
 				const defaultMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: true, shininess: 0	} );
@@ -90,40 +90,40 @@ export default {
 					let geometry = new THREE.BoxGeometry();
 
 					const position = new THREE.Vector3();
-					position.x = Math.random() * 10000 - 5000;
-					position.y = Math.random() * 6000 - 3000;
-					position.z = Math.random() * 8000 - 4000;
+					this.position.x = Math.random() * 10000 - 5000;
+					this.position.y = Math.random() * 6000 - 3000;
+					this.position.z = Math.random() * 8000 - 4000;
 
 					const rotation = new THREE.Euler();
-					rotation.x = Math.random() * 2 * Math.PI;
-					rotation.y = Math.random() * 2 * Math.PI;
-					rotation.z = Math.random() * 2 * Math.PI;
+					this.rotation.x = Math.random() * 2 * Math.PI;
+					this.rotation.y = Math.random() * 2 * Math.PI;
+					this.rotation.z = Math.random() * 2 * Math.PI;
 
 					const scale = new THREE.Vector3();
-					scale.x = Math.random() * 200 + 100;
-					scale.y = Math.random() * 200 + 100;
-					scale.z = Math.random() * 200 + 100;
+					this.scale.x = Math.random() * 200 + 100;
+					this.scale.y = Math.random() * 200 + 100;
+					this.scale.z = Math.random() * 200 + 100;
 
-					quaternion.setFromEuler( rotation );
-					matrix.compose( position, quaternion, scale );
+					this.quaternion.setFromEuler( rotation );
+					this.matrix.compose( position, quaternion, scale );
 
-					geometry.applyMatrix4( matrix );
+					this.geometry.applyMatrix4( this.matrix );
 
 					// give the geometry's vertices a random color, to be displayed
 
-					applyVertexColors( geometry, color.setHex( Math.random() * 0xffffff ) );
+					applyVertexColors( this.geometry, color.setHex( Math.random() * 0xffffff ) );
 
-					geometriesDrawn.push( geometry );
+					this.geometriesDrawn.push( this.geometry );
 
-					geometry = geometry.clone();
+					this.geometry = geometry.clone();
 
 					// give the geometry's vertices a color corresponding to the "id"
 
-					applyVertexColors( geometry, color.setHex( i ) );
+					applyVertexColors( this.geometry, color.setHex( i ) );
 
-					geometriesPicking.push( geometry );
+					geometriesPicking.push( this.geometry );
 
-					pickingData[ i ] = {
+					this.pickingData[ i ] = {
 
 						position: position,
 						rotation: rotation,
@@ -133,35 +133,35 @@ export default {
 
 				}
 
-				const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn ), defaultMaterial );
-				scene.add( objects );
+				const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( this.geometriesDrawn ), defaultMaterial );
+				this.scene.add( objects );
 
-				pickingScene.add( new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesPicking ), pickingMaterial ) );
+				this.pickingScene.add( new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesPicking ), pickingMaterial ) );
 
-				highlightBox = new THREE.Mesh(
+				this.highlightBox = new THREE.Mesh(
 					new THREE.BoxGeometry(),
 					new THREE.MeshLambertMaterial( { color: 0xffff00 }
 					) );
-				scene.add( highlightBox );
+				this.scene.add( this.highlightBox );
 
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
+				this.renderer = new THREE.WebGLRenderer( { antialias: true } );
+				this.renderer.setPixelRatio( window.devicePixelRatio );
+				this.renderer.setSize( window.innerWidth, window.innerHeight );
+				this.container.appendChild( this.renderer.domElement );
 
-				controls = new TrackballControls( camera, renderer.domElement );
-				controls.rotateSpeed = 1.0;
-				controls.zoomSpeed = 1.2;
-				controls.panSpeed = 0.8;
-				controls.noZoom = false;
-				controls.noPan = false;
-				controls.staticMoving = true;
-				controls.dynamicDampingFactor = 0.3;
+				this.controls = new TrackballControls( this.camera, this.renderer.domElement );
+				this.controls.rotateSpeed = 1.0;
+				this.controls.zoomSpeed = 1.2;
+				this.controls.panSpeed = 0.8;
+				this.controls.noZoom = false;
+				this.controls.noPan = false;
+				this.controls.staticMoving = true;
+				this.controls.dynamicDampingFactor = 0.3;
 
-				stats = new Stats();
-				container.appendChild( stats.dom );
+				this.stats = new Stats();
+				this.container.appendChild( this.stats.dom );
 
-				renderer.domElement.addEventListener( 'pointermove', onPointerMove );
+				this.renderer.domElement.addEventListener( 'pointermove', this.onPointerMove );
 
 			},
 
@@ -169,17 +169,17 @@ export default {
 
 			onPointerMove( e ) {
 
-				pointer.x = e.clientX;
-				pointer.y = e.clientY;
+				this.pointer.x = e.clientX;
+				this.pointer.y = e.clientY;
 
 			},
 
 			animate() {
 
-				requestAnimationFrame( animate );
+				requestAnimationFrame( this.animate );
 
-				render();
-				stats.update();
+				this.render();
+				this.stats.update();
 
 			},
 
@@ -189,16 +189,16 @@ export default {
 
 				// set the view offset to represent just a single pixel under the mouse
 
-				camera.setViewOffset( renderer.domElement.width, renderer.domElement.height, pointer.x * window.devicePixelRatio | 0, pointer.y * window.devicePixelRatio | 0, 1, 1 );
+				this.camera.setViewOffset( this.renderer.domElement.width, this.renderer.domElement.height, this.pointer.x * window.devicePixelRatio | 0, this.pointer.y * window.devicePixelRatio | 0, 1, 1 );
 
 				// render the scene
 
-				renderer.setRenderTarget( pickingTexture );
-				renderer.render( pickingScene, camera );
+				this.renderer.setRenderTarget( this.pickingTexture );
+				this.renderer.render( this.pickingScene, this.camera );
 
 				// clear the view offset so rendering returns to normal
 
-				camera.clearViewOffset();
+				this.camera.clearViewOffset();
 
 				//create buffer for reading single pixel
 
@@ -206,7 +206,7 @@ export default {
 
 				//read the pixel
 
-				renderer.readRenderTargetPixels( pickingTexture, 0, 0, 1, 1, pixelBuffer );
+				this.renderer.readRenderTargetPixels( this.pickingTexture, 0, 0, 1, 1, pixelBuffer );
 
 				//interpret the pixel as an ID
 
@@ -219,16 +219,16 @@ export default {
 
 					if ( data.position && data.rotation && data.scale ) {
 
-						highlightBox.position.copy( data.position );
-						highlightBox.rotation.copy( data.rotation );
-						highlightBox.scale.copy( data.scale ).add( offset );
-						highlightBox.visible = true;
+						this.highlightBox.position.copy( data.position );
+						this.highlightBox.rotation.copy( data.rotation );
+						this.highlightBox.scale.copy( data.scale ).add( offset );
+						this.highlightBox.visible = true;
 
 					}
 
 				} else {
 
-					highlightBox.visible = false;
+					this.highlightBox.visible = false;
 
 				}
 
@@ -236,18 +236,18 @@ export default {
 
 			render() {
 
-				controls.update();
+				this.controls.update();
 
-				pick();
+				this.pick();
 
-				renderer.setRenderTarget( null );
-				renderer.render( scene, camera );
+				this.renderer.setRenderTarget( null );
+				this.renderer.render( this.scene, this.camera );
 
 			}
   },
   mounted() {
-      init()
-			animate()
+    this.init()
+	this.animate()
   },
   computed: {
     
