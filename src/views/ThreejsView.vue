@@ -39,7 +39,7 @@ export default {
     };
   },
   created: function () {
-  //  init()
+//    this.init()
   },
   methods: {
    init() {
@@ -90,38 +90,38 @@ export default {
 					let geometry = new THREE.BoxGeometry();
 
 					const position = new THREE.Vector3();
-					this.position.x = Math.random() * 10000 - 5000;
-					this.position.y = Math.random() * 6000 - 3000;
-					this.position.z = Math.random() * 8000 - 4000;
+					position.x = Math.random() * 10000 - 5000;
+					position.y = Math.random() * 6000 - 3000;
+					position.z = Math.random() * 8000 - 4000;
 
 					const rotation = new THREE.Euler();
-					this.rotation.x = Math.random() * 2 * Math.PI;
-					this.rotation.y = Math.random() * 2 * Math.PI;
-					this.rotation.z = Math.random() * 2 * Math.PI;
+					rotation.x = Math.random() * 2 * Math.PI;
+					rotation.y = Math.random() * 2 * Math.PI;
+					rotation.z = Math.random() * 2 * Math.PI;
 
 					const scale = new THREE.Vector3();
-					this.scale.x = Math.random() * 200 + 100;
-					this.scale.y = Math.random() * 200 + 100;
-					this.scale.z = Math.random() * 200 + 100;
+					scale.x = Math.random() * 200 + 100;
+					scale.y = Math.random() * 200 + 100;
+					scale.z = Math.random() * 200 + 100;
 
-					this.quaternion.setFromEuler( rotation );
-					this.matrix.compose( position, quaternion, scale );
+					quaternion.setFromEuler( rotation );
+					matrix.compose( position, quaternion, scale );
 
-					this.geometry.applyMatrix4( this.matrix );
+					geometry.applyMatrix4( matrix );
 
 					// give the geometry's vertices a random color, to be displayed
 
-					applyVertexColors( this.geometry, color.setHex( Math.random() * 0xffffff ) );
+					applyVertexColors( geometry, color.setHex( Math.random() * 0xffffff ) );
 
-					this.geometriesDrawn.push( this.geometry );
+					geometriesDrawn.push( geometry );
 
-					this.geometry = geometry.clone();
+					geometry = geometry.clone();
 
 					// give the geometry's vertices a color corresponding to the "id"
 
-					applyVertexColors( this.geometry, color.setHex( i ) );
+					applyVertexColors( geometry, color.setHex( i ) );
 
-					geometriesPicking.push( this.geometry );
+					geometriesPicking.push( geometry );
 
 					this.pickingData[ i ] = {
 
@@ -133,7 +133,7 @@ export default {
 
 				}
 
-				const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( this.geometriesDrawn ), defaultMaterial );
+				const objects = new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesDrawn ), defaultMaterial );
 				this.scene.add( objects );
 
 				this.pickingScene.add( new THREE.Mesh( BufferGeometryUtils.mergeBufferGeometries( geometriesPicking ), pickingMaterial ) );
@@ -247,7 +247,7 @@ export default {
   },
   mounted() {
     this.init()
-	this.animate()
+	// this.animate()
   },
   computed: {
     
