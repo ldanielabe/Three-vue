@@ -3,7 +3,6 @@
 </template>
 
 <script>
-// import { Clock, PerspectiveCamera, Scene, WebGLRenderer } from 'three'
 import * as THREE from "three";
 import TrackballControls from "three-trackballcontrols";
 import Stats from '../libs/stats.module.js';
