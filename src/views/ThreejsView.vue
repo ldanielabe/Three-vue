@@ -246,7 +246,7 @@ export default {
   },
   mounted() {
     this.init()
-	// this.animate()
+	this.animate()
   },
   computed: {
     
